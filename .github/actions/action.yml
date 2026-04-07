@@ -1236,6 +1236,21 @@ runs:
         CONFIG_TRACEPOINTS=y
         EOF
 
+    - name: Add Droidspaces Support
+      shell: bash
+      run: |
+        set -euo pipefail
+        echo "Add Droidspaces Support"
+        cat >> "$COMMON_KERNEL_FOLDER/arch/arm64/configs/gki_defconfig" <<EOF
+        CONFIG_NAMESPACES=y
+        CONFIG_PID_NS=y
+        CONFIG_IPC_NS=y
+        CONFIG_DEVTMPFS=y
+        CONFIG_DEVTMPFS_MOUNT=y
+        CONFIG_CGROUPS=y
+        CONFIG_CGROUP_DEVICE=y
+        EOF
+
     - name: Add RUST build configs
       shell: bash
       if: ${{ env.OP_RUST_BUILD == 'true' }}
